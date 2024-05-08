@@ -5,6 +5,7 @@
 #include <iostream>
 #include <numeric>
 #include <ostream>
+#include <stdexcept>
 #include <string>
 #include <glm/glm.hpp>
 #include <utility>
@@ -137,22 +138,49 @@ namespace Math {
     template<typename T>
     class Vector{
         std::vector<T> vector;
-        size_t size = 0;
+        size_t s = 0;
 
         public:
         Vector(){};
         Vector(size_t s){ vector = std::vector<T>(s, 0); } 
         Vector(std::vector<T> v) : vector(v){};
-        Vector(std::initializer_list<T> values) : size(values.size()), vector(values) {}
+        Vector(std::initializer_list<T> values) : s(values.size()), vector(values) {}
 
         template<typename... Args>
-        Vector(Args&&... args) : vector{std::forward<Args>(args)...}, size(sizeof...(args)) {}
+        Vector(Args&&... args) : vector{std::forward<Args>(args)...}, s(sizeof...(args)) {}
 
-        std::vector<int> t;
+        size_t size(){
+            return s;
+        }
         
         void push_back(T t){
             t.push_back(t);
-            size += 1;
+            s += 1;
+        }
+
+        T operator[](size_t idx){
+            if (idx >= s) {
+                throw std::out_of_range("Index out of range");
+            }
+            return vector[idx];
+        }
+
+        Vector<T> operator+(Vector<T> ad){
+            if (s != ad.size()) throw std::invalid_argument("Are not same size");
+            for(int& x : vector) // if you want to add 10 to each element
+                x += 10;
+        }
+
+        Vector<T> operator-(Vector<T> ad){
+            if (s != ad.size()) throw std::invalid_argument("Are not same size");
+            for (int i; i<s; i++) {
+                
+            }
+        }
+
+        Vector<T> operator*(T mul){
+            for(int& x : vector) // if you want to add 10 to each element
+                x *= mul;
         }
         
     };
