@@ -294,6 +294,14 @@ namespace Math {
         return os << "]";
     }
 
+    template<class T>
+    bool has_zero(std::span<T> sp){
+        for (const auto& e : sp) {
+            if(e == 0) return true;
+        }
+        return false;
+    }
+
     template<typename T>
     class Matrix{
         std::unique_ptr<T[]> data;
@@ -335,6 +343,8 @@ namespace Math {
                 os << mat[y] << (y+1 < mat.height ? "\n" : "");
             return os << "]";
         }
+
+        
 
         std::span<T> operator[](std::size_t i) const{
             return std::span<T>{data.get()+(i*width), width};  
