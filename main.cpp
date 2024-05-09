@@ -1,5 +1,6 @@
 #include <glm/detail/qualifier.hpp>
 #include <glm/geometric.hpp>
+#include <initializer_list>
 #include <iostream>
 
 #include <numeric>
@@ -23,19 +24,36 @@ void printVec(T v, int l){
 
 int main(int argc, char const *argv[]) {
 
-    glm::mat<3, 4, Frag::fraction<int>> matrix = {{Frag::fraction(3,1), Frag::fraction(0,1), Frag::fraction(-1,1), Frag::fraction(0,1)},
-                                       {Frag::fraction(8,1), Frag::fraction(0,1), Frag::fraction(0,1), Frag::fraction(-2,1)},
-                                       {Frag::fraction(0,1), Frag::fraction(2,1), Frag::fraction(-2,1), Frag::fraction(-1,1)},
-                                       };
 
-    glm::mat<3,4, float> matrix2 = {{3,0,-1,0},
-                                    {8,0,0,-2},
-                                    {0,2,-2,-1}};
+    std::span<Frag::fraction<int>> vf;
+    Frag::fraction<int> f;
+    auto xde = Math::multiply(vf,f);
 
 
-    gaussian::Input<glm::mat<3,4, Frag::fraction<int>>>(matrix, 3, 4);
+    std::cout  << " eeeeeeeeeee"<< std::endl;
+    Math::Matrix<Frag::fraction<int>> matrix(
+        std::initializer_list<Frag::fraction<int>>{Frag::fraction(3,1), Frag::fraction(0,1), Frag::fraction(-1,1), Frag::fraction(0,1)},
+        std::initializer_list<Frag::fraction<int>>{Frag::fraction(8,1), Frag::fraction(0,1), Frag::fraction(0,1), Frag::fraction(-2,1)},
+        std::initializer_list<Frag::fraction<int>>{Frag::fraction(0,1), Frag::fraction(2,1), Frag::fraction(-2,1), Frag::fraction(-1,1)}
+    );
+
+    Math::Matrix<float> mat2(
+        std::initializer_list<float>{3,0,-1, 0},
+        std::initializer_list<float>{8,0,0, -2},
+        std::initializer_list<float>{0,2,-2,1}
+    );
+
+    std::cout << "matrix: " << std::endl << matrix << std::endl;
+
+
+    gaussian::Input(mat2, mat2.width, mat2.height);
+    /*
     std::cout << " ---- " << std::endl;
-    gaussian::Input<glm::mat<3,4, float>>(matrix2, 3, 4);
+    gaussian::Input(matrix, matrix.width, matrix.height);
+    */
+
+
+
 
     return 0;
 }

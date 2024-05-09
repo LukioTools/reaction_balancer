@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Frag.hpp"
 #include <glm/detail/qualifier.hpp>
 #include <iostream>
 #include <glm/glm.hpp>
@@ -8,11 +9,11 @@
 
 namespace gaussian {
     template<typename M>
-    void dump_matrix(const M& matrix)
+    void dump_matrix(M& matrix)
     {
-        for (int i = 0; i < matrix.length(); i++)
+        for (int i = 0; i < matrix.height; i++)
         {
-            for (int j = 0; j < matrix[i].length(); j++)
+            for (int j = 0; j < matrix.width; j++)
             {
                 std::cout << matrix[i][j] << " ";
             }
@@ -21,20 +22,20 @@ namespace gaussian {
     }
 
     template<typename V, typename T>
-    void row_scale(V& row, T ratio)
+    void row_scale(V row, T ratio)
     {
-        row *= ratio;
+        Math::meq(row, ratio);
     }
 
     template<typename V, typename T>
-    void row_replace(V& base, const V& op, T ratio)
+    void row_replace(V base, const V op, T ratio)
     {
-        base += (op * ratio);
-
+        auto v = Math::multiply(op, ratio);
+        Math::addeq(base, std::span(v));
     }
 
     template<typename V>
-    void row_exchange(V& a, V& b)
+    void row_exchange(V a, V b)
     {
         V temp = a;
         a = b;
@@ -42,7 +43,7 @@ namespace gaussian {
     }
 
     template<typename M>
-    int is_nonzero_column(const M& matrix, int column_id, int rows, int next_row_id)
+    int is_nonzero_column( M& matrix, int column_id, int rows, int next_row_id)
     {
         for (int row = next_row_id; row < rows; row++)
         {
@@ -53,7 +54,7 @@ namespace gaussian {
     }
 
     template <typename M>
-    void Input(M matrix, int m, int n)
+    void Input(Math::Matrix<M>& matrix, int m, int n)
     {
         int next_row_id = 0;
         for (int col = 0; col < n; col++)

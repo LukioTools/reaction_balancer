@@ -1,1 +1,1 @@
-/usr/bin/c++ -rdynamic CMakeFiles/main.dir/main.cpp.o -o main  /usr/lib/libglm.a
+/usr/bin/c++  -std=c++20 -g -rdynamic CMakeFiles/main.dir/main.cpp.o -o main  /usr/lib/libglm.a
