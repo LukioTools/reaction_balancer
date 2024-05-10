@@ -40,13 +40,10 @@ int main(int argc, char const *argv[]) {
     Math::Matrix<float> mat2(
         std::initializer_list<float>{3,0,-1, 0},
         std::initializer_list<float>{8,0,0, -2},
-        std::initializer_list<float>{0,2,-2,1}
+        std::initializer_list<float>{0,2,-2,-1}
     );
 
-    std::cout << "matrix: " << std::endl << matrix << std::endl;
-
-
-    gaussian::Input(mat2, mat2.width, mat2.height);
+    gaussian::Input(mat2, mat2.width, mat2.height); 
     /*
     std::cout << " ---- " << std::endl;
     gaussian::Input(matrix, matrix.width, matrix.height);

@@ -56,9 +56,11 @@ namespace gaussian {
     template <typename M>
     void Input(Math::Matrix<M>& matrix, int m, int n)
     {
+        std::cout << matrix << "\n" << std::endl;
         int next_row_id = 0;
         for (int col = 0; col < n; col++)
         {
+
             int nonzero_row_id = is_nonzero_column(matrix, col, m, next_row_id);
             if (nonzero_row_id >= 0)
             {
@@ -69,11 +71,18 @@ namespace gaussian {
                 }
                 next_row_id++;
 
+                
+
+
                 for (int row = next_row_id; row < m; row++)
                 {
                     if (matrix[row][col] == 0)
                         continue;
-                    row_replace(matrix[row], matrix[nonzero_row_id], -matrix[row][col] / matrix[nonzero_row_id][col]);
+                    auto ratio = -matrix[row][col] / matrix[nonzero_row_id][col];
+                    std::cout << matrix << "\n" << std::endl;
+                    row_replace(matrix[row], matrix[nonzero_row_id], ratio);
+                    std::cout << matrix << "\n" << std::endl;
+                    
                 }
             }
         }

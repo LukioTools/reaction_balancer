@@ -208,8 +208,9 @@ namespace Math {
     template<typename T>
     void addeq(const std::span<T> a, const std::span<T> b){
         if (a.size() != b.size()) throw std::invalid_argument("Are not same size");
-        for (unsigned long i = 0; i<a.size(); i++)
-            a[i] += b[i];
+        for (unsigned long i = 0; i<a.size(); i++){            
+                 a[i] += b[i];
+            }
     }
 
     template<typename T>
@@ -286,8 +287,8 @@ namespace Math {
             a[i] /= b[i];
     }
 
-    template<class T>
-    std::ostream& operator<<(std::ostream& os, const std::span<T>& mat){
+    template<class T, size_t F>
+    std::ostream& operator<<(std::ostream& os, const std::span<T, F>& mat){
         os << "[";
         for(size_t y = 0; y < mat.size(); ++y)
             os << mat[y] << (y+1 < mat.size() ? ", " : "");
