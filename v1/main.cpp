@@ -37,10 +37,10 @@ int main(int argc, char const *argv[]) {
         std::initializer_list<Frag::fraction<int>>{Frag::fraction(0,1), Frag::fraction(2,1), Frag::fraction(-2,1), Frag::fraction(-1,1)}
     );
 
-    Math::Matrix<float> mat2(
-        std::initializer_list<float>{3,0,-1, 0},
-        std::initializer_list<float>{8,0,0, -2},
-        std::initializer_list<float>{0,2,-2,-1}
+    Math::Matrix<int> mat2(
+        std::initializer_list<int>{3,0,-1, 0},
+        std::initializer_list<int>{8,0,0, -2},
+        std::initializer_list<int>{0,2,-2,-1}
     );
 
     gaussian::Input(mat2, mat2.width, mat2.height); 
