@@ -1,0 +1,3 @@
+/home/hiha/developer/c++/Reaktioyhtälö/v2/CMakeFiles/main.dir
+/home/hiha/developer/c++/Reaktioyhtälö/v2/CMakeFiles/edit_cache.dir
+/home/hiha/developer/c++/Reaktioyhtälö/v2/CMakeFiles/rebuild_cache.dir
